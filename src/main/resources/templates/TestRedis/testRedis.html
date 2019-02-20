@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试redis缓存</title>
+</head>
+<body>
+<table>
+    <form action="selectUser" method="get">
+    <tr>
+        <td>查询用户</td>
+        <td>请输入用户名：<input type="text" name="selectUser"></td>
+        <td><input type="submit" value="查询"></td>
+    </tr>
+    </form>
+    <form action="updateUser" method="get">
+    <tr>
+        <td>更新用户</td>
+        <td>原用户名：<input type="text" name="username"></td>
+        <td>现用户名：<input type="text" name="newUsername"></td>
+        <td><input type="submit" value="更新"></td>
+    </tr>
+    </form>
+    <tr>
+        <td>删除用户</td>
+        <td>请输入用户名：<input type="text" name="delUser"></td>
+        <td><input type="submit" value="删除"></td>
+    </tr>
+</table>
+</body>
+</html>

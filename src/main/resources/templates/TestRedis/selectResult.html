@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询结果</title>
+</head>
+<body>
+<h1>进入查询结果界面。</h1>
+<table>
+    <tr>
+        <td th:text="${user.userId}">无</td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.salt}"></td>
+        <td th:text="${user.name}"></td>
+    </tr>
+</table>
+</body>
+</html>
