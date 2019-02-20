@@ -54,6 +54,7 @@ public class RedisController {
         User user=userMapper.findByName(username);
         user.setUsername(newUsername);
         System.out.println(user.getUserId()+","+user.getUsername()+","+user.getSalt());
+        System.out.println("ss");
         boolean result=userMapper.updateUsername(user);
         //存在key，则删除该map,将新的map加进去；不存在key，则直接设置key、value。
         if(isKey){
