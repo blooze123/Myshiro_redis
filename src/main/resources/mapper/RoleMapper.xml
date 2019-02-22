@@ -179,6 +179,6 @@
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
   <select id="findRole" parameterType="com.uoffice.shiro.bean.UserRole" resultType="com.uoffice.shiro.bean.Role">
-    select role_id,server_name from user_role where user_id=#{userId}
+    select role_id as roleId,server_name as serverName from role where role_id in (select role_id as roleId from user_role where user_id=#{userId} )
   </select>
 </mapper>

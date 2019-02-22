@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日期选择器</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<!-- 注意：这一层div并不是必须的，只是为了美观一点 -->
+<div class="layui-inline">
+    <input type="text" class="layui-input" id="test1">
+</div>
+
+<script src="/static/build/layui.js"></script>
+<script th:inline="javascript">
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1'
+            //表示只查询年这个级别的日期
+            //,type: 'year'
+            ////表示查询到当前时间这个级别的日期
+           // ,type: 'datetime'
+           //默认级别，到日。
+            // 重点：thymeleaf如何传值到js，只要在script头上加上th:inline="javascript"，然后按如下格式就可以将后台的值获取到！!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            ,type: [[${Mydate}]]
+            //自定义日期字符串组合
+            ,format: 'yyyy年MM月dd日'
+            //自定义设置可选择的日期范围
+            ,min: -7
+            ,max: 7
+
+        });
+    });
+</script>
+</body>
+</html>

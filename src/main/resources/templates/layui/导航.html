@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>水平竖直导航</title>
+    <link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+    <script src="/resources/layui/layui.js"></script>
+</head>
+<body>
+<!--水平导航栏-->
+<ul class="layui-nav layui-bg-green" lay-filter="">
+    <!--一级菜单-->
+    <li class="layui-nav-item" ><a href="/lform" id="part">最新活动</a></li>
+    <!--设定layui-this来指定当前页面选择项-->
+    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+    <li class="layui-nav-item">
+        <!--javascript:;表示该标签不会被点击，无法跳转页面-->
+        <a href="javascript:;">解决方案</a>
+        <!-- 二级菜单 -->
+        <dl class="layui-nav-child">
+            <dd><a href="">移动模块</a></dd>
+            <dd><a href="">后台模版</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">社区</a></li>
+    <!--导航栏还内置了图片和徽章的支持-->
+    <li class="layui-nav-item"><a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+        <dl class="layui-nav-child"></dl>
+        <span class="layui-badge-dot"></span>
+    </li>
+</ul>
+
+<!--竖直导航栏-->
+<!--水平、垂直、侧边三个导航的HTML结构是完全一样的,仅仅是追加的class不用而已-->
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+    <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="javascript:;">默认展开</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:;">选项1</a></dd>
+            <dd><a href="javascript:;">选项2</a></dd>
+            <dd><a href="">跳转</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child">
+            <dd><a href="">移动模块</a></dd>
+            <dd><a href="">后台模版</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">产品</a></li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+</ul>
+<!--面包屑（小导航栏），lay-separator控制分割符号-->
+<span class="layui-breadcrumb" lay-separator="-">
+  <a href="">首页</a>
+  <a href="">国际新闻</a>
+  <a href="">亚太地区</a>
+  <a><cite>正文</cite></a>
+</span>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作。即至少以下代码一定要有才可以。
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>玩转layui</title>
+    <link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+    <script src="/resources/layui/layui.js"></script>
+</head>
+<body>
+<h1 align="center">按钮事件与进度条</h1>
+<!--控制进度条的按钮事件-->
+<button class="layui-btn layui-btn-normal " id="changPercent">进度条加一</button>
+<button  class="layui-btn layui-btn-xs layui-btn-disabled">警告按钮</button>
+<script>
+    //绑定按钮事件，实现进度条百分比跳动。
+    layui.use('element', function(){
+        //在layui中调用jquery!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        var $=layui.jquery;
+        var element = layui.element;
+        $(document).on('click','#changPercent',function(){
+            element.progress('demo','70%');
+        });
+    });
+</script>
+<!--进度条代码：lay-filter是过滤器，通过此过滤器用js来控制进度条跳动-->
+<div class="layui-progress" lay-filter="demo" lay-showPercent="yes" >
+    <div class="layui-progress-bar layui-bg-red" lay-percent="30%"></div>
+</div>
+<br><br><br>
+
+<!-------------------------------------------------------------------------------------->
+<h1 align="center">内置评星模板与内置图标</h1>
+<!--评星点赞-->
+<div id="test1" ></div>
+
+<div>
+ //layui内置图标
+<i class="layui-icon layui-icon-praise"></i>
+<span id="ping"></span>
+</div>
+<script>
+    //获得layui评星的内置模板
+    layui.use('rate', function(){
+        var rate = layui.rate;
+        var $=layui.jquery;
+        //渲染过程
+        var ins1 = rate.render({
+            elem: '#test1'  //绑定元素
+            ,setText: function(value) {
+                //设置每个星级的内容
+                var arrs = {
+                    '1': '极差'
+                    , '2': '差'
+                    , '3': '中等'
+                    , '4': '好'
+                };
+                //获得评价结果
+                $("#ping").text(arrs[value] || (value + "星"));
+            }
+        });
+    });
+</script>
+<br><br><br>
+<!-------------------------------------------------------------------------------------->
+<h1 align="center">动画效果</h1>
+<!--其中 layui-anim 是必须的，后面跟着的即是不同的动画类-->
+<div class="layui-anim layui-anim-rotate">动起来</div>
+</body>
+</html>

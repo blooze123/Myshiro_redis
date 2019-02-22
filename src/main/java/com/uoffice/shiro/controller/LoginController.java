@@ -1,20 +1,12 @@
 package com.uoffice.shiro.controller;
 
-import com.uoffice.shiro.shiro.MyShiroRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import java.sql.SQLOutput;
-import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -50,6 +42,16 @@ public class LoginController {
     public String logout(){
         System.out.println("进入logout方法");
         return "logout";
+    }
+
+    @RequestMapping("/test2")
+    public ModelAndView test2(){
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("testShiro权限");
+        Subject subject=SecurityUtils.getSubject();
+        subject.checkRole("admin");
+        subject.checkPermission("select");
+        return mav;
     }
 
 //    public static void main(String[] args) {

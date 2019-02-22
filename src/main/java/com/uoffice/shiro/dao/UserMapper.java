@@ -30,7 +30,7 @@ public interface UserMapper {
 
     boolean updateByPrimaryKey(User record);
 
-    User selectAll();
+    List<User> selectAll();
 
     User findByName(String name);
 

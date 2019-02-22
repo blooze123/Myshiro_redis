@@ -47,12 +47,14 @@ public class MyShiroRealm extends AuthorizingRealm {
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         for (Role role:roleList) {
+            System.out.println("该用户的角色为："+role.getServerName()+"  ");
             //添加角色
             simpleAuthorizationInfo.addRole(role.getServerName());
             //根据角色ID获得该角色所拥有的所有权限
             rolePermission.setRoleId(role.getRoleId());
             permissionList=loginService.finPermission(rolePermission);
             for (Permission permission:permissionList) {
+                System.out.println("该角色的权限为："+permission.getName()+"  ");
                 //添加权限
                 simpleAuthorizationInfo.addStringPermission(permission.getName());
             }
@@ -75,10 +77,9 @@ public class MyShiroRealm extends AuthorizingRealm {
             return null;
         } else {
             System.out.println("进入doGetAuthenticationInfo方法认证登陆！");
-
-
             //这里验证authenticationToken和simpleAuthenticationInfo的信息
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, user.getPassword().toString(), getName());
+            //对密码进行加盐
             simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("blooze"));
             return simpleAuthenticationInfo;
         }

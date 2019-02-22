@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>layui选项卡</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<!--选项卡，可以根据追加的class修改不一样的选项卡风格-->
+<div class="layui-tab layui-tab-brief" lay-filter="test1">
+    <ul class="layui-tab-title">
+        <li class="layui-this">网站设置</li>
+        <li>用户管理</li>
+        <li lay-id="110">权限分配</li>
+        <li>商品管理</li>
+        <li>订单管理</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">内容1</div>
+        <div class="layui-tab-item">内容2</div>
+        <div class="layui-tab-item">内容3</div>
+        <div class="layui-tab-item">内容4</div>
+        <div class="layui-tab-item">内容5</div>
+    </div>
+</div>
+
+<span class="layui-breadcrumb" lay-separator="-" lay-filter="demo">
+  <a href="">首页</a>
+  <a href="">国际新闻</a>
+  <a href="">亚太地区</a>
+  <a><cite>正文</cite></a>
+</span>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<!--以下设置，可以将layid被当成动态id,可以直接根据URL的地址跳转到相应的选项卡中，实现与后台的交互-->
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+        //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值，test1为过滤器值lay-filter
+        var layid = location.hash.replace(/^#test1=/, '');
+        //假设当前地址为：http://localhost:8080/tab#test1=110，那么选项卡会自动切换到“权限分配”这一项
+        element.tabChange('test1', layid);
+
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(test1)', function(){
+            location.hash = 'test1='+ this.getAttribute('lay-id');
+        });
+    });
+</script>
+</body>
+</html>

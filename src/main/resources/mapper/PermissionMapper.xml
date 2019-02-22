@@ -194,6 +194,6 @@
     where permission_id = #{permissionId,jdbcType=BIGINT}
   </update>
   <select id="finPermission" parameterType="com.uoffice.shiro.bean.Role" resultType="com.uoffice.shiro.bean.Permission">
-    select permission_id,name from role_permission where role_id=#{roleId}
+    select permission_id as permissionId,name from permission where permission_id in (select permission_id as permissionId from role_permission where role_id=#{roleId})
   </select>
 </mapper>

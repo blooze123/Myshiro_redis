@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>layer的运用</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+
+<script>
+    layui.use('layer', function(){
+
+        layer.open({
+            //设置基本层类型：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+            type: 1,
+            //文本内容
+            content: '传入任意的文本',
+            title:'layer的运用',
+            //设置皮肤
+            skin: 'layui-layer-lan',
+            //设置弹窗的位置和坐标
+            offset: 't',
+            //按钮及按钮的回调事件
+            btn: ['按钮一', '按钮二', '按钮三']
+            ,yes: function(index, layero){
+                //按钮【按钮一】的回调
+            }
+            ,btn2: function(index, layero){
+                //按钮【按钮二】的回调
+                //return false 开启该代码可禁止点击该按钮关闭
+            }
+            ,cancel: function(){
+                //右上角关闭回调
+                //return false 开启该代码可禁止点击该按钮关闭
+            },
+            //设置宽高
+            area: ['500px', '300px'],
+            //遮罩效果的阴影深浅
+            shade:0.5,
+            //间隔多久后自动关闭弹窗
+            time:3000,
+            //弹窗动画效果
+            anim:6,
+            //.....具体见layui官方说明文档
+        });
+
+         //设置alert的弹窗风格
+        layer.alert('酷毙了', {icon: 3});
+    });
+</script>
+</body>
+</html>

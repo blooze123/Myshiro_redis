@@ -224,7 +224,7 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <select id="selectAll" resultType="com.uoffice.shiro.bean.User">
-    select * from user
+    select user_id as userId,username,password,name,salt,state from user
   </select>
   <select id="findByName" parameterType="string" resultType="com.uoffice.shiro.bean.User">
     select user_id as userId,username,password,name,salt,state from user where username=#{username}

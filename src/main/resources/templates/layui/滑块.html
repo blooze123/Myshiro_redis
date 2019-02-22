@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>滑块</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<h1>滑块</h1>
+<div id="slideTest1"></div>
+<script>
+    layui.use('slider', function(){
+        var slider = layui.slider;
+        //渲染
+        slider.render({
+            elem: '#slideTest1'  //绑定元素
+            ,max:10
+            ,showstep:true      //	是否显示间断点
+        });
+    });
+</script>
+</body>
+</html>

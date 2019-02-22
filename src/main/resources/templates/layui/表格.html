@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<table id="demo" lay-filter="test" class="layui-table"></table>
+
+<script src="/layui/layui.js"></script>
+<!--需要加入th:inline="none"来保证模板正确-->
+<script th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+        ////注意：如果要成功在前端渲染表格，则一定要在后端使用map来存储list数据，以及code，msg，count，data这些基本参数
+        table.render({
+            elem: '#demo'
+            ,height: 200
+            ,url: '/jsontable' //数据接口
+            //注意！使用layui的表格渲染时，只要前端有设置page、limit这两个属性，则后端一定能够获取到page、limit这两个参数。
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']//自定义分页布局
+                ,first: true //不显示首页
+                ,last: true //不显示尾页
+            }
+            ,limit:3
+            ,cols: [[
+                {field: 'userId', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'username', title: '用户名', width:80}
+                ,{field: 'password', title: '密码', width:80}
+                ,{field: 'name', title: '真实姓名', width:80, sort: true}
+                ,{field: 'salt', title: '盐', width:80}
+                ,{field: 'state', title: '状态', width:80}
+            ]]
+
+
+        });
+    });
+</script>
+</body>
+</html>
