@@ -7,29 +7,95 @@
 </head>
 <link rel="stylesheet" href="/resources/layui/css/layui.css"/>
 <script src="/resources/layui/layui.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
 
-<button type="button" class="layui-btn" id="test1">
-    <i class="layui-icon">&#xe67c;</i>上传图片
-</button>
+      <legend>图片信息</legend>
 
-<script src="/static/build/layui.js"></script>
+</fieldset> 
+ 
+<div class="layui-upload">
+      <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button> 
+      <div class="layui-upload-list">
+        <table class="layui-table">
+          <thead>
+        <tr><th>文件名</th>
+            <th>大小</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr></thead>
+          <tbody id="demoList"></tbody>
+        </table>
+      </div>
+      <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+      <button type="button" class="layui-btn" id="back">返回</button>
+</div>
 <script>
+    var id = $("#agendaId").val();
     layui.use('upload', function(){
-        var upload = layui.upload;
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        //多文件列表示例
+        var demoListView = $('#demoList')
+            ,uploadListIns = upload.render({
+            elem: '#testList'
+            ,url: '/uploadFile'
+            ,accept: 'file'
+            ,data:{}   //可放扩展数据  key-value
+            ,multiple: true
+            ,auto: false
+            ,bindAction: '#testListAction'
+            ,choose: function(obj){
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function(index, file, result){
+                    var tr = $(['<tr id="upload-'+ index +'">'
+                        ,'<td>'+ file.name +'</td>'
+                        ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                        ,'<td>等待上传</td>'
+                        ,'<td>'
+                        ,'<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+                        ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+                        ,'</td>'
+                        ,'</tr>'].join(''));
 
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: '/upload/' //上传接口
-            ,done: function(res){
-                //上传完毕回调
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function(){
+                        obj.upload(index, file);
+                    });
+
+                    //删除
+                    tr.find('.demo-delete').on('click', function(){
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+
+                    demoListView.append(tr);
+                });
             }
-            ,error: function(){
-                //请求异常回调
+            ,done: function(res, index, upload){
+                if(res == 1) //上传成功
+                {
+                    //找到了一行tr,获取该tr下面的所有子元素（children()）
+                    var tr = demoListView.find('tr#upload-'+ index),tds = tr.children();
+                    // 然后再将子元素里面的第二个值设置一个<span>上传成功</span>，第三个值设置为空。eq(n)操作相当于获得元素数组中的第n个元素
+                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                    tds.eq(3).html(''); //清空操作
+                }
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+
+            } //code为后台传回来的数据，具体多少自己定，
+
+            //后台只能传回json格式数据，不然会走error函数；
+
+            ,error: function(index, upload){
+                var tr = demoListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
-            ,multiple:true
-            ,number:2
         });
     });
 </script>

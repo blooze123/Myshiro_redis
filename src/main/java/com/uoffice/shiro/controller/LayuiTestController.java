@@ -4,14 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.uoffice.shiro.bean.User;
 import com.uoffice.shiro.dao.UserMapper;
+import com.uoffice.shiro.service.ImageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,6 +112,19 @@ public class LayuiTestController {
     @RequestMapping("/file")
     public String fileLoad(){
         return "layui/文件上传";
+    }
+
+    @ResponseBody
+    @RequestMapping("/uploadFile")
+    public int uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception{
+        //获取本项目内部的源路径
+        String path= ResourceUtils.getURL("classpath:").getPath();
+        System.out.println(path);
+        //处理图片的方法，入参为项目源路径和图片文件，并返回图片路径。
+        String imagepath= ImageService.imageSave(file,path);
+        System.out.println("上传成功，存储图片名为："+imagepath);
+
+        return 1;
     }
 
 
