@@ -13,9 +13,13 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +85,10 @@ public class MyShiroRealm extends AuthorizingRealm {
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, user.getPassword().toString(), getName());
             //对密码进行加盐
             simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("blooze"));
+            //获得session会话。
+            HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session=request.getSession();
+            session.setAttribute("user",user);
             return simpleAuthenticationInfo;
         }
     }

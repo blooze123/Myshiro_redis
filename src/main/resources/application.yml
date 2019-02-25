@@ -78,3 +78,12 @@ spring:
       logging:
       config: classpath:logback-spring.xml
 
+   #对rabbit的配置信息
+  application:
+    name: Spring-boot-rabbitmq
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+

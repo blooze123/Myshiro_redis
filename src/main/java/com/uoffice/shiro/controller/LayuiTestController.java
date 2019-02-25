@@ -57,6 +57,10 @@ public class LayuiTestController {
     public String timeline(){
         return "layui/时间线";
     }
+    @RequestMapping("/tu")
+    public String tu(){
+        return "layui/图标";
+    }
     @RequestMapping("/layer")
     public String layer(){
         return "layui/layer的运用";
@@ -132,5 +136,11 @@ public class LayuiTestController {
         return "layui/分析图表";
     }
 
-
+    @RequestMapping("/main")
+    public String mainFrame(){
+        return "layui/mainFrame";
+    }
 }
+
+
+

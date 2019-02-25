@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf的具体运用</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<!--使用@进行URL跳转-->
+<a th:href="@{/file}">使用@进行URL跳转</a>
+<!--使用each进行for循环-->
+<table>
+    <caption>使用thymeleaf进行循环操作</caption>
+    <!--iterStat称作状态变量,有属性：
+    index:当前迭代对象的index（从0开始计算）
+    count: 当前迭代对象的index(从1开始计算)
+    size:被迭代对象的大小
+    current:当前迭代变量
+    even/odd:布尔值，当前循环是否是偶数/奇数（从0开始计算）
+    first:布尔值，当前循环是否是第一个
+    last:布尔值，当前循环是否是最后一个-->
+ <tr th:each="user,iterStat:${userList}">
+        <td><h2 th:text="${user['username']}"></h2></td>
+        <td><h2 th:text="${user['password']}"></h2></td>
+        <td><h2 th:text="${user['name']}"></h2></td>
+        <td><h2 th:text="${user['state']}"></h2></td>
+    </tr>
+</table>
+<!--图片路径-->
+<img th:src="@{/imgs/a1.jpg}" alt="图片显示错误">
+<!--字符串拼接,使用|内容|可以实现快速拼接。也可以使用通用的+号。-->
+<span th:text="|Welcome to our application, ${myUser.username}!|"></span>
+<!--内联js：要在js里面使用后台传过来的参数，要用<script th:inline="javascript"></script>来进行声明即可使用，然后在js中，使用[[${参数}]]来获取后台的数据。-->
+<!--内联的工具类，可以通过#来直接调用：
+dates ： java.util.Date的功能方法类。
+calendars : 类似#dates，面向java.util.Calendar
+numbers : 格式化数字的功能方法类
+strings : 字符串对象的功能类，contains,startWiths,prepending/appending等等。
+objects: 对objects的功能类操作。
+bools: 对布尔值求值的功能方法。
+arrays：对数组的功能类方法。
+lists: 对lists功能类方法
+sets
+maps-->
+<h1 th:text="${#strings.toUpperCase(myUser.username)}"></h1>
+</body>
+</html>
