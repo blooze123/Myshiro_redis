@@ -127,5 +127,10 @@ public class LayuiTestController {
         return 1;
     }
 
+    @RequestMapping("/tubiao")
+    public String tubiao(){
+        return "layui/分析图表";
+    }
+
 
 }
