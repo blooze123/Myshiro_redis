@@ -33,7 +33,7 @@ public class LoginController {
                 password);
         //进行验证，这里可以捕获异常，然后返回对应信息
         subject.login(usernamePasswordToken);
-        return "index";
+        return "mainFrame";
     }
     @RequestMapping("/index")
     public ModelAndView toIndex(){
@@ -58,9 +58,4 @@ public class LoginController {
         subject.checkPermission("select");
         return mav;
     }
-
-//    public static void main(String[] args) {
-//        Md5Hash md5=new Md5Hash("aa","blooze");
-//        System.out.println(md5.toString());
-//    }
 }
