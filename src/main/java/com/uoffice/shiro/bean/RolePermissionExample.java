@@ -2,10 +2,11 @@ package com.uoffice.shiro.bean;
 
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class RolePermissionExample {
+public class RolePermissionExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

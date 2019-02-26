@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 @Repository
-public class User {
+public class User implements Serializable{
     private Long userId;
 
     private String username;

@@ -2,8 +2,10 @@ package com.uoffice.shiro.bean;
 
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 @Repository
-public class Role {
+public class Role implements Serializable {
     private Long roleId;
 
     private String serverName;

@@ -2,8 +2,10 @@ package com.uoffice.shiro.bean;
 
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 @Repository
-public class Permission {
+public class Permission implements Serializable {
     private Long permissionId;
 
     private String url;
