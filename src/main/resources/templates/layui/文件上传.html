@@ -89,7 +89,6 @@
             } //code为后台传回来的数据，具体多少自己定，
 
             //后台只能传回json格式数据，不然会走error函数；
-
             ,error: function(index, upload){
                 var tr = demoListView.find('tr#upload-'+ index)
                     ,tds = tr.children();

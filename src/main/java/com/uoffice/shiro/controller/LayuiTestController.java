@@ -17,12 +17,18 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * layui的实现controller,主要用于layui的实例演示
+ */
 @Controller
+@RequestMapping("/lay")
 public class LayuiTestController {
     @Resource
     private UserMapper userMapper;
