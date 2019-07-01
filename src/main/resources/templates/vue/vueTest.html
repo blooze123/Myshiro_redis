@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<body>
+<!--v1：基础vue应用-->
+<div id="aa">
+    <h1 align="center">{{title}}</h1>
+    <h3>普通欢迎语:{{welcome}}</h3>
+    <h3>数字尺寸:{{site}}</h3>
+    <h3>方法欢迎语:{{wel()}}</h3>
+</div>
+<script>
+    var v1=new Vue({
+        //id绑定，一定要绑定id,否则数据无法显示
+        el:"#aa",
+        //data:数据字段、html显示
+        data:{
+            title:"Vue学习教程",
+            welcome:"欢迎使用vue!",
+            site:100
+        },
+        //方法集，记得methods有s
+        methods:{
+            //普通方法
+          wel:function(){
+              return this.welcome+"学习参考教程为：菜鸟驿站";
+          }
+        }
+    })
+</script>
+</body>
+</html>

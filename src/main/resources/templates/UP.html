@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="/resources/layui/css/layui.css"/>
+<script src="/resources/layui/layui.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script>
+    function mySubmit() {
+        $.ajax({
+            url:"/testUP",
+            type:"get",
+            data:$('#formSubmit').serialize(),
+            contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
+            success:function(){
+                alert("成功");
+            },
+            error:function () {
+                alert("失败");
+            }
+        });
+    }
+</script>
+<body>
+<form id="formSubmit">
+<table>
+
+    <tr>
+        <td>user:name</td>
+        <td><input type="text" name="user.name" ></td>
+    </tr>
+    <!--<tr>-->
+        <!--<td>Permission:name</td>-->
+        <!--<td><input type="text" name="pname"></td>-->
+    <!--</tr>-->
+    <tr>
+        <td>aa</td>
+        <td><input type="text" name="aa"></td>
+    </tr>
+    <tr>
+        <td>Permission:url</td>
+        <td><input type="text" name="Permission.url"></td>
+    </tr>
+    <tr>
+        <td>user:username</td>
+        <td><input type="text" name="user.username"></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="提交" onclick="mySubmit()"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

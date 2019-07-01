@@ -32,7 +32,6 @@
 <img th:src="@{/imgs/a1.jpg}" alt="图片显示错误">
 <!--字符串拼接,使用|内容|可以实现快速拼接。也可以使用通用的+号。-->
 <span th:text="|Welcome to our application, ${myUser.username}!|"></span>
-<!--内联js：要在js里面使用后台传过来的参数，要用<script th:inline="javascript"></script>来进行声明即可使用，然后在js中，使用[[${参数}]]来获取后台的数据。-->
 <!--内联的工具类，可以通过#来直接调用：
 dates ： java.util.Date的功能方法类。
 calendars : 类似#dates，面向java.util.Calendar
